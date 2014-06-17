@@ -1,0 +1,49 @@
+{% extends "account/dash_base.html" %}
+{% load staticfiles %}
+
+{% block sidebar %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><a href="/accounts/profile/">Overview</a></li>
+          <li><a href="/mystats/">My Stats</a></li>
+          <li class="active"><a href="/ocr_performance/">OCR Performance</a></li>
+          <li><a href="/seg_performance/">Segmentation Performance</a></li>
+          <li><a href="/file_list/">Downloads</a></li>
+          <li><a href="/upload/">New Submission</a></li>
+          <li><a href="/leaderboards/">Leaderboards</a></li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block content %}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">OCR Performance</h1>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Algorithm</th>
+            <th>Date Submitted</th>
+            <th>Character Error Rate</th>
+            <th>Word Error Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if history %}
+          {% for h in history %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ h.history.algo }}</td>
+            <td>{{ h.history.uptime }}</td>
+            <td>{{ h.char_error }}</td>
+            <td>{{ h.word_error }}</td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}

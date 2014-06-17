@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load account %}
+{% block custom_styles %}
+  <!-- Custom styles for this template -->
+  <link href="{% static "assets/css/signin.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <form class="form-signin" role="form" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+        {% if form.non_field_errors %}
+          {{ form.non_field_errors }}
+        {% endif %}
+        <h2 class="form-signin-heading">Please Sign Up</h2>
+        <input type="text" value="" id="id_username" maxlength="30" name="username" class="form-control" placeholder="Username" required autofocus>{% if form.username.errors %}{{ form.username.errors }}{% endif %}
+        <input id="id_email" name="email" type="email" placeholder="email@address.com" class="form-control" required autofocus>
+        {% if form.email.errors %}
+          {{ form.email.errors }}
+        {% endif %}
+        <input type="password" name="password1" value="" id="id_password1" class="form-control" placeholder="Password" required>{% if form.password1.errors %}dsfsd{{ form.password1.errors }}{% endif %}
+        <input type="password" name="password2" value="" id="id_password2" class="form-control" placeholder="Re-type Password" required>{% if form.password2.errors %}{{ form.password2.errors }}{% endif %}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    </form>
+  </div>
+{% endblock %}

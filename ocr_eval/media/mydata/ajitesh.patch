@@ -1,0 +1,31 @@
+diff --git app/soc/models/seed_db.py app/soc/models/seed_db.py
+index df93a17..9ba887f 100644
+--- app/soc/models/seed_db.py
++++ app/soc/models/seed_db.py
+@@ -436,12 +436,12 @@ def seed(request, *args, **kwargs):
+        }
+   melange_project = GSoCProject(**project_properties)
+   melange_project.put()
+-  ndb_orgs[1].slot_allocation = 1
+-  ndb_orgs[1].put()
++  ndb_orgs[0].slot_allocation = 1
++  ndb_orgs[0].put()
+ 
+   student_data.number_of_projects = 1
+   student_data.number_of_proposals = 1
+-  student_data.project_for_orgs = [ndb_orgs[1].key]
++  student_data.project_for_orgs = [ndb_orgs[0].key]
+ 
+   melange_student.put()
+   melange_student2.put()
+@@ -452,8 +452,8 @@ def seed(request, *args, **kwargs):
+       })
+   melange_project2 = GSoCProject(**project_properties)
+   melange_project2.put()
+-  ndb_orgs[1].slot_allocation += 1
+-  ndb_orgs[1].put()
++  ndb_orgs[0].slot_allocation += 1
++  ndb_orgs[0].put()
+ 
+   student_id = 'student'
+   student_properties.update({

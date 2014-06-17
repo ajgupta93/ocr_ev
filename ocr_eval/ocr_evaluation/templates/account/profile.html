@@ -1,0 +1,28 @@
+{% extends "account/dash_base.html" %}
+{% load staticfiles %}
+
+{% block sidebar %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="/accounts/profile/">Overview</a></li>
+          <li><a href="/mystats/">My Stats</a></li>
+          <li><a href="/ocr_performance/">OCR Performance</a></li>
+          <li><a href="/seg_performance/">Segmentation Performance</a></li>
+          <li><a href="/file_list/">Downloads</a></li>
+          <li><a href="/upload/">New Submission</a></li>
+          <li><a href="/leaderboards/">Leaderboards</a></li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block content %}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Overview</h1>
+      <h2 class="sub-header">Welcome</h2>
+      <p>This is where you can look at your sumission history, past performance in both OCR and segmentation sections, access the data files, submit results and access leaderboards.</p>
+      <h2 class="sub-header">Announcements</h2>
+      <p>There are no announcements as of now but keep watching this for more.</p>
+  </div>
+{% endblock %}

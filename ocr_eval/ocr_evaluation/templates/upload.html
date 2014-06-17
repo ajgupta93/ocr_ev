@@ -1,0 +1,55 @@
+{% extends "account/dash_base.html" %}
+{% load staticfiles %}
+
+{% block sidebar %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><a href="/accounts/profile/">Overview</a></li>
+          <li><a href="/mystats/">My Stats</a></li>
+          <li><a href="/ocr_performance/">OCR Performance</a></li>
+          <li><a href="/seg_performance/">Segmentation Performance</a></li>
+          <li><a href="/file_list/">Downloads</a></li>
+          <li class="active"><a href="/upload/">New Submission</a></li>
+          <li><a href="/leaderboards/">Leaderboards</a></li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Upload your result</h1>
+    {% url '/upload_file/' as upload %}
+    <form action="{{ upload }}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Algorithm Name" name="algo" maxlength="50" minlength="1"/>
+        </div><br>
+        <select name="dataset" onchange="this.form.submit();">
+        {% for data in datasets %}
+          <option value="{{ data.id }}">{{ data.name }}</option>
+        {% endfor %}
+        </select>
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          <br><p>{{ form.non_field_errors }}</p>
+        </div>
+        {% endif %}
+        <p>{{ form.docfile.help_text }}</p>
+        <p>
+            {% if form.docfile.errors %}  
+            <div class="alert alert-danger">{{ form.docfile.errors }}</div>
+            {% endif %}
+            {{ form.docfile }}
+        </p>
+        <p><input type="submit" class="btn btn-success" value="Upload" /></p>
+    </form>
+    <h2 class="sub-header">Instructions</h2>
+    <ul>
+      <li>Download the Test Data from the Downloads Section</li>
+      <li>Run the code on the test data to obtain the output in the specified format</li>
+      <li>Upload the output in the above field</li>
+    </ul>
+{% endblock %}
+

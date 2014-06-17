@@ -1,0 +1,12 @@
+<html>
+<head>
+    <p>Performance Section</p>
+</head>
+<body>
+    {% for s in stats %}
+    <p>{{ loop.counter }}</p>
+    <p>Criteria 1 : {{ s.criteria_1 }}</p>
+    <p>Criteria 2 : {{ s.criteria_2 }}</p>
+    {% endfor %}
+    <a href="/accounts/profile/">Home</a>
+</body>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load account %}
+{% block custom_styles %}
+  <!-- Custom styles for this template -->
+  <link href="{% static "assets/css/signin.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% if form.errors %}
+      <div class="alert alert-danger">Sorry, that's not a valid username or password.</div>
+    {% endif %}
+    <form action="{% url 'account_login' %}" method="POST" class="form-signin" role="form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <h2 class="form-signin-heading">Please sign in</h2>
+      <input type="text" name="login" value="" id="id_login" class="form-control" placeholder="Username" required autofocus>{{ form.login.errors }}
+      <input type="password" name="password" value="" id="id_password" class="form-control" placeholder="Password" required>{{ form.password.errors }}
+      <label class="checkbox" for="id_remember">
+        <input type="checkbox" id="id_remember" name="remember" value="remember-me"> Remember me
+      </label>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br>
+      <a href="{% url 'account_reset_password' %}"><div class="btn btn-lg btn-primary btn-block">Forgot Password</div></a>
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+    </form>
+  </div> <!-- /container -->
+{% endblock %}
+

@@ -1,0 +1,74 @@
+{% extends "account/dash_base.html" %}
+{% load staticfiles %}
+
+{% block custom_styles %}
+  <script src="{% static 'assets/js/jquery.flot.js' %}"></script>
+{% custom_styles %}
+
+{% block sidebar %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><a href="/accounts/profile/">Overview</a></li>
+          <li class="active"><a href="/mystats/">My Stats</a></li>
+          <li><a href="/ocr_performance/">OCR Performance</a></li>
+          <li><a href="/seg_performance/">Segmentation Performance</a></li>
+          <li><a href="/file_list/">Downloads</a></li>
+          <li><a href="/upload/">New Submission</a></li>
+          <li><a href="/leaderboards/">Leaderboards</a></li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block content %}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">My Stats</h1>
+    <h2 class="sub-header">Performance Graph</h2>
+      {{chart.as_html}}
+    <h2 class="sub-header">Best Performance</h2>
+    <p>Algorithm : {{ best.history.algo }}</p>
+    <p>Dataset : {{ best.history.dataset.name }}</p>
+    <p>Upload Time : {{ best.history.uptime }}</p>
+    <label>Overall Performance</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.total }}" aria-valuemin="0" aria-valuemax="300" style="width: {{ best.total }}%;">{{ best.total }}</div>
+    </div>
+    <label>Character Error</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.char_error }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.char_error }}%;">{{ best.char_error }}</div>
+    </div>
+    <label>Word Error</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.word_error }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.word_error }}%;">{{ best.word_error }}</div>
+    </div>
+    <label>False Detections</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.false_detect }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.false_detect }}%;">{{ best.false_detect }}</div>
+    </div>
+    <label>Missed Detections</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.missed_detect }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.missed_detect }}%;">{{ best.missed_detect }}</div>
+    </div>
+      <label>Total Undersegmentations</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.under_seg }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.under_seg }}%;">{{ best.under_seg }}</div>
+    </div>
+      <label>Total Undersegmented Components</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.under_seg_comp }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.under_seg_comp }}%;">{{ best.under_seg_comp }}</div>
+    </div>
+      <label>Total Oversegmentations</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.over_seg }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.over_seg }}%;">{{ best.over_seg }}</div>
+    </div>
+      <label>Total Oversegmented Components</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.over_seg_comp }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.over_seg_comp }}%;">{{ best.over_seg_comp }}</div>
+    </div>
+      <label>Correct Oversegmentations</label>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ best.correct_seg }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ best.correct_seg }}%;">{{ best.correct_seg }}</div>
+    </div>
+  </div>
+{% endblock %}

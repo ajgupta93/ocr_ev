@@ -1,0 +1,25 @@
+{% extends "account/dash_base.html" %}
+{% load staticfiles %}
+
+{% block sidebar %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li><a href="/accounts/profile/">Overview</a></li>
+          <li><a href="/mystats/">My Stats</a></li>
+          <li><a href="/ocr_performance/">OCR Performance</a></li>
+          <li><a href="/seg_performance/">Segmentation Performance</a></li>
+          <li><a href="/file_list/">Downloads</a></li>
+          <li><a href="/upload/">New Submission</a></li>
+          <li class="active"><a href="/leaderboards/">Leaderboards</a></li>
+        </ul>
+      </div>
+{% endblock %}
+
+{% block content %}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Leaderboards</h1>
+      <p>Sorry, no competitions as yet so there are no leaderboards. Keep watching this space for more.</p>
+  </div>
+{% endblock %}

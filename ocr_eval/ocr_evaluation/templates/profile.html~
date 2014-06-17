@@ -1,0 +1,11 @@
+{% load account %}
+<html>
+<head>
+    <p>Welcome {% user_display user%}</p>
+</head>
+<body>
+    <p>This your profile and will contain info about your account and your past performance record</p>
+    <a href="/accounts/logout/">Logout</a>
+    <a href="/upload">Upload File</a>
+</body>
+</html>
